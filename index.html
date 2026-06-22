@@ -166,13 +166,14 @@
                 margin: 0 auto !important;
             }
 
-            /* 手機螢幕等比例縮放配適 (因404寬度較寬，zoom縮放需更小) */
-            @media (max-width: 375px) { .classroom-grid, .stage-area { zoom: 0.23 !important; } }
-            @media (min-width: 376px) and (max-width: 414px) { .classroom-grid, .stage-area { zoom: 0.26 !important; } }
-            @media (min-width: 415px) and (max-width: 440px) { .classroom-grid, .stage-area { zoom: 0.28 !important; } }
-            @media (min-width: 441px) and (max-width: 768px) { .classroom-grid, .stage-area { zoom: 0.48 !important; } }
+/* 手機螢幕等比例縮放配適 (微調縮放係數，避免超出各尺寸手機邊界) */
+@media (max-width: 375px) { .classroom-grid, .stage-area { zoom: 0.22 !important; } }
+@media (min-width: 376px) and (max-width: 414px) { .classroom-grid, .stage-area { zoom: 0.24 !important; } }
+@media (min-width: 415px) and (max-width: 440px) { .classroom-grid, .stage-area { zoom: 0.27 !important; } }
+@media (min-width: 441px) and (max-width: 768px) { .classroom-grid, .stage-area { zoom: 0.46 !important; } }
 
-            .main-container { padding: 10px 4px !important; overflow-x: hidden !important; }
+/* 將 overflow-x 改為 auto，防止極限邊緣被強制裁切，保留微幅滑動彈性 */
+.main-container { padding: 10px 4px !important; overflow-x: auto !important; }
             .nav-bar { padding: 12px 8px !important; }
             .nav-bar span { font-size: 18px !important; }
             .nav-btn { font-size: 15px !important; padding: 6px 12px !important; }
