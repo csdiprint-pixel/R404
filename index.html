@@ -723,17 +723,14 @@ function handleSeatClick(seatCode) {
         const existingName = studentFilledData[seatCode] || "";
         const myBookedSeat = localStorage.getItem(`mySeat_102_${currentClassID}`); 
         const isBackend = (currentPage === "admin"); // 判斷是否為管理員後台
+
+        // 【新增攔截邏輯】如果是前台學生，且點擊的座位已有人，且不是自己的座位 -> 直接無反應不跳視窗
+        if (!isBackend && existingName && myBookedSeat !== seatCode) {
+            return; 
+        }
         
         document.getElementById("targetSeatLabel").innerText = `座位 ${seatCode}`;
-
-        // 【新增遮蔽邏輯】決定視窗內要顯示的名字
-        let displayModalName = existingName;
-        // 如果是前台學生，且座位已有人，且不是自己的座位 -> 將名字打碼
-        if (!isBackend && existingName && myBookedSeat !== seatCode) {
-            displayModalName = maskName(existingName); // 呼叫你原本寫好的 maskName 函數
-        }
-
-        document.getElementById("studentName").value = displayModalName; // 塞入處理後的名字
+        document.getElementById("studentName").value = existingName;
         
         if (existingName) {
             document.getElementById("studentName").disabled = true; 
